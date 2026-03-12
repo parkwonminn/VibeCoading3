@@ -3,61 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>환영합니다</title>
+    <meta name="description" content="심플하고 반응형인 아름다운 웹사이트입니다. 깔끔한 디자인과 인터랙티브한 경험을 제공합니다.">
+    <meta property="og:title" content="My Site — 환영합니다">
+    <meta property="og:description" content="심플하고 반응형인 아름다운 웹사이트입니다.">
+    <meta property="og:type" content="website">
+    <title>My Site — 환영합니다</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <span class="logo">My Site</span>
-            <ul class="nav-list">
-                <li><a href="#intro">소개</a></li>
-                <li><a href="#features">기능</a></li>
-                <li><a href="#contact">연락처</a></li>
+    <a href="#main-content" class="skip-to-main">본문으로 건너뛰기</a>
+
+    <header class="header" id="siteHeader">
+        <nav class="nav" aria-label="주요 내비게이션">
+            <a href="#intro" class="logo" aria-label="홈으로 이동">My Site</a>
+            <button
+                class="hamburger-button"
+                id="hamburgerButton"
+                aria-expanded="false"
+                aria-controls="navMenu"
+                aria-label="메뉴 열기"
+            >
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-list" id="navMenu" role="list">
+                <li><a href="#intro" class="nav-link" data-section="intro">소개</a></li>
+                <li><a href="#features" class="nav-link" data-section="features">기능</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">연락처</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section id="intro" class="hero">
-            <h1 class="hero-title">환영합니다</h1>
+    <main id="main-content">
+        <section id="intro" class="hero" aria-labelledby="heroTitle">
+            <h1 class="hero-title" id="heroTitle">환영합니다</h1>
             <p class="hero-description">간단하고 아름다운 웹사이트에 오신 것을 환영합니다.</p>
             <button id="greetingButton" class="cta-button">인사하기</button>
         </section>
 
-        <section id="features" class="features">
-            <h2 class="section-title">주요 기능</h2>
+        <section id="features" class="features" aria-labelledby="featuresTitle">
+            <h2 class="section-title" id="featuresTitle">주요 기능</h2>
             <div class="feature-grid">
                 <article class="feature-card">
-                    <span class="feature-icon">✦</span>
+                    <span class="feature-icon" aria-hidden="true">✦</span>
                     <h3>심플함</h3>
                     <p>불필요한 요소 없이 깔끔한 디자인</p>
                 </article>
                 <article class="feature-card">
-                    <span class="feature-icon">✦</span>
+                    <span class="feature-icon" aria-hidden="true">✦</span>
                     <h3>반응형</h3>
                     <p>모든 기기에서 최적의 화면 제공</p>
                 </article>
                 <article class="feature-card">
-                    <span class="feature-icon">✦</span>
+                    <span class="feature-icon" aria-hidden="true">✦</span>
                     <h3>인터랙티브</h3>
                     <p>클릭과 호버로 생동감 있는 경험</p>
                 </article>
             </div>
         </section>
 
-        <section id="contact" class="contact">
-            <h2 class="section-title">오늘의 시간</h2>
-            <p id="currentTime" class="time-display"></p>
+        <section id="contact" class="contact" aria-labelledby="contactTitle">
+            <div class="contact-inner">
+                <h2 class="section-title" id="contactTitle">연락처</h2>
+                <p class="contact-description">궁금한 점이 있으시면 메시지를 남겨주세요.</p>
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="senderName">이름</label>
+                        <input
+                            type="text"
+                            id="senderName"
+                            name="senderName"
+                            placeholder="홍길동"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="senderEmail">이메일</label>
+                        <input
+                            type="email"
+                            id="senderEmail"
+                            name="senderEmail"
+                            placeholder="example@email.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="messageContent">메시지</label>
+                        <textarea
+                            id="messageContent"
+                            name="messageContent"
+                            rows="5"
+                            placeholder="메시지를 입력해주세요..."
+                            required
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="cta-button submit-button">메시지 보내기</button>
+                </form>
+            </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 간단한 웹사이트. 모든 권리 보유.</p>
+        <p id="currentTime" class="time-display" aria-live="polite" aria-label="현재 시간"></p>
+        <p>&copy; <span id="copyrightYear"></span> My Site. 모든 권리 보유.</p>
     </footer>
+
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
     <script src="script.js"></script>
 </body>
